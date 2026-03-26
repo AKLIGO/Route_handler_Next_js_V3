@@ -26,3 +26,14 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
         },
     });
 }
+
+export async function DELETE(_request: Request, { params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    const index= commments.findIndex((c) => c.id === parseInt(id));
+    const deleteComment = commments.splice(index, 1);
+    return new Response(JSON.stringify(deleteComment[0]), {
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+}
